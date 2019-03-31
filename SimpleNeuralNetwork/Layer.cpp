@@ -42,17 +42,12 @@ std::vector<Point> Layer::OutputConvolution(std::vector<Point> input)
 		double summX = 0;
 		double summY = 0;
 
-		for (int ordinal = 0; ordinal < input.size(); ordinal++) {
+		for (unsigned int ordinal = 0; ordinal < input.size(); ordinal++) {
 			summX += (input[ordinal].x * WeightMatrix[ordinal][neuron] + BiasVector[ordinal]);
 			summY += (input[ordinal].y * WeightMatrix[ordinal][neuron] + BiasVector[ordinal]);
 		}
 
 		output.push_back(Point(summX, summY));
 	}
-
-	if (_next != nullptr) {
-		return _next->OutputConvolution(output);
-	}
-	else
-		return output;
+	return output;
 }

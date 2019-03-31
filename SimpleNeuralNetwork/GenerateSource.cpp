@@ -13,12 +13,12 @@ void GenerateSource::Generate()
 	std::mt19937 rng(dev());
 	std::uniform_int_distribution<std::mt19937::result_type> dist(0, 1000); // distribution in range [1, 6
 	std::uniform_int_distribution<std::mt19937::result_type> dist2(0, 100);
-	LinearFunction lnf = LinearFunction(dist2(rng), dist(rng), 10);
+	LinearFunction lnf = LinearFunction(dist2(rng), dist(rng));
 	//LinearFunction lnf = LinearFunction(1, 1, 10);
 	std::vector<Point> points;
 
 	for (int i = 0; i < 10000; i++) {
-		points.push_back(Point::CalculatePointFromLinearFunction(lnf, dist(rng)));
+		points.push_back(Point::CalculatePointFromLinearFunction(lnf, dist(rng), 1));
 	}
 
 	std::ofstream myfile("example.txt");
@@ -34,24 +34,31 @@ void GenerateSource::Generate()
 
 
 	std::cout << lnf.getShift() << " " << lnf.getSlope() << std::endl;
-	Point a = Point::CalculatePointFromLinearFunction(lnf, 1);
+	Point a = Point::CalculatePointFromLinearFunction(lnf, 1, 1);
 	std::cout << a.x << " " << a.y << std::endl;
 }
 
-std::vector<Point> GenerateSource::GeneratePoints()
+
+// Generating data source for teaching and testing network
+std::vector<Point> GenerateSource::GeneratePoints(int sourceSize)
 {
+	// for random number generation
 	std::random_device dev;
 	std::mt19937 rng(dev());
-	std::uniform_int_distribution<std::mt19937::result_type> dist(0, 1000); // distribution in range [1, 6
-	std::uniform_int_distribution<std::mt19937::result_type> dist2(0, 100);
-	LinearFunction lnf = LinearFunction(dist2(rng), dist(rng), 10);
-	//LinearFunction lnf = LinearFunction(1, 1, 10);
+	// one for the y - intercept and for the resource generation
+	// one for the linear function slope
+	std::uniform_int_distribution<std::mt19937::result_type> dist(0, 1000);
+	std::uniform_int_distribution<std::mt19937::result_type> dist100(0, 100);
+	std::uniform_int<int> distDeviation(-10, 10);
+	// defining the linear function
+	LinearFunction lnf = LinearFunction(dist100(rng), dist(rng));
 	std::vector<Point> points;
 
-	for (int i = 0; i < 10000; i++) {
-		points.push_back(Point::CalculatePointFromLinearFunction(lnf, dist(rng)));
+	for (int i = 0; i < sourceSize; i++) {
+		points.push_back(Point::CalculatePointFromLinearFunction(lnf, dist(rng), distDeviation(rng)));
 	}
 
+	// creating file with the generated data
 	std::ofstream myfile("example.txt");
 	if (myfile.is_open())
 	{
@@ -61,18 +68,30 @@ std::vector<Point> GenerateSource::GeneratePoints()
 		}
 		myfile.close();
 	}
+
+	// Error "log"
 	else std::cout << "Unable to open file";
 	std::cout << lnf.getSlope() << " " << lnf.getShift() << std::endl;
+
 	return points;
 }
 
-std::shared_ptr<Layer> GenerateSource::GenerateNetwork(int size)
+std::shared_ptr<LinkedNetwork> GenerateSource::GenerateNetwork(int weightMatrixSize, int networkSize)
 {
-	std::shared_ptr<Layer> head = std::make_shared<Layer>(size, size);
-	std::shared_ptr<Layer> next = std::make_shared<Layer>(size, 2);
-	head->_next = next;
-	next->_prev = head;
+	std::shared_ptr<LinkedNetwork> network = std::make_shared<LinkedNetwork>();
+	Layer headOfNetwork = Layer(weightMatrixSize, weightMatrixSize);
 	
-	return head;
+	network->AddToEnd(headOfNetwork);
+	
+	networkSize--;
+	
+	while (networkSize > 0)
+	{
+		Layer next = Layer(weightMatrixSize, 2);
+		network->AddToEnd(next);
+		networkSize--;
+	}
+	
+	return network;
 }
 

@@ -1,17 +1,15 @@
 #pragma once
 
-struct LinearFunction
+class LinearFunction
 {
-
+public:
 	LinearFunction() {
 		_slope = 0;
 		_shift = 0;
-		_deviation = 1;
 	}
-	LinearFunction(long slope, long shift, long deviation) {
+	LinearFunction(long slope, long shift) {
 		_slope = slope;
 		_shift = shift;
-		_deviation = deviation;
 	}
 
 	virtual ~LinearFunction() {};
@@ -21,13 +19,7 @@ struct LinearFunction
 
 	void setShift(long shift) { _shift = shift; }
 	long getShift() { return _shift; }
-
-	void setWrapper(long deviation) { _deviation = deviation; }
-	long getWrapper() { return _deviation; }
-
-
-
-	long _deviation;
+private:
 	long _shift;
 	long _slope;
 };

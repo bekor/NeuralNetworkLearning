@@ -14,9 +14,9 @@ public:
 
 	virtual ~Point() {};
 
-	static Point CalculatePointFromLinearFunction(LinearFunction lnf, double rndX) {
+	static Point CalculatePointFromLinearFunction(LinearFunction lnf, double rndX, int deviation) {
 		double y = lnf.getSlope() * rndX + lnf.getShift();
-		return Point(rndX + lnf.getWrapper(), y);
+		return Point(rndX + deviation, y);
 	}
 
 	double x;

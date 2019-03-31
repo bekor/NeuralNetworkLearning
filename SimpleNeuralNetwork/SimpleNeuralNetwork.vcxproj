@@ -154,18 +154,23 @@
     <ClInclude Include="GenerateSource.h" />
     <ClInclude Include="Layer.h" />
     <ClInclude Include="LinearFunction.hpp" />
+    <ClInclude Include="LinkedNetwork.h" />
+    <ClInclude Include="Node.hpp" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Point.hpp" />
+    <ClInclude Include="Program.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GenerateSource.cpp" />
     <ClCompile Include="Layer.cpp" />
+    <ClCompile Include="LinkedNetwork.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="Program.cpp" />
     <ClCompile Include="SimpleNeuralNetwork.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

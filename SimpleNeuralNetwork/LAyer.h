@@ -13,9 +13,6 @@ public:
 
 	std::vector<Point> OutputConvolution(std::vector<Point> input);
 
-
-	std::weak_ptr<Layer> _prev;
-	std::shared_ptr<Layer> _next;
 private:
 
 	long _neuronCount;

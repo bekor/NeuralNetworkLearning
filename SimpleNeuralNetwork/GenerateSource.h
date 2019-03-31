@@ -1,13 +1,13 @@
 #pragma once
 
 #include "Layer.h"
-
+#include "LinkedNetwork.h"
 class GenerateSource
 {
 public:
 	static void Generate();
-	static std::vector<Point> GeneratePoints();
+	static std::vector<Point> GeneratePoints(int sourceSize);
 
-	static std::shared_ptr<Layer> GenerateNetwork(int size);
+	static std::shared_ptr<LinkedNetwork> GenerateNetwork(int weightMatrixSize, int networkSize = 1);
 };
 

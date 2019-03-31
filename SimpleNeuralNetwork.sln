@@ -5,8 +5,6 @@ VisualStudioVersion = 15.0.28307.421
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SimpleNeuralNetwork", "SimpleNeuralNetwork\SimpleNeuralNetwork.vcxproj", "{1FEEAB79-3C2A-467A-A62B-21A0C1EE7953}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Dll1", "Dll1\Dll1.vcxproj", "{1DA7F696-102B-4219-AD93-9CA1D318378F}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|ARM = Debug|ARM
@@ -31,18 +29,6 @@ Global
 		{1FEEAB79-3C2A-467A-A62B-21A0C1EE7953}.Release|x64.Build.0 = Release|x64
 		{1FEEAB79-3C2A-467A-A62B-21A0C1EE7953}.Release|x86.ActiveCfg = Release|Win32
 		{1FEEAB79-3C2A-467A-A62B-21A0C1EE7953}.Release|x86.Build.0 = Release|Win32
-		{1DA7F696-102B-4219-AD93-9CA1D318378F}.Debug|ARM.ActiveCfg = Debug|Win32
-		{1DA7F696-102B-4219-AD93-9CA1D318378F}.Debug|ARM64.ActiveCfg = Debug|Win32
-		{1DA7F696-102B-4219-AD93-9CA1D318378F}.Debug|x64.ActiveCfg = Debug|x64
-		{1DA7F696-102B-4219-AD93-9CA1D318378F}.Debug|x64.Build.0 = Debug|x64
-		{1DA7F696-102B-4219-AD93-9CA1D318378F}.Debug|x86.ActiveCfg = Debug|Win32
-		{1DA7F696-102B-4219-AD93-9CA1D318378F}.Debug|x86.Build.0 = Debug|Win32
-		{1DA7F696-102B-4219-AD93-9CA1D318378F}.Release|ARM.ActiveCfg = Release|Win32
-		{1DA7F696-102B-4219-AD93-9CA1D318378F}.Release|ARM64.ActiveCfg = Release|Win32
-		{1DA7F696-102B-4219-AD93-9CA1D318378F}.Release|x64.ActiveCfg = Release|x64
-		{1DA7F696-102B-4219-AD93-9CA1D318378F}.Release|x64.Build.0 = Release|x64
-		{1DA7F696-102B-4219-AD93-9CA1D318378F}.Release|x86.ActiveCfg = Release|Win32
-		{1DA7F696-102B-4219-AD93-9CA1D318378F}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
