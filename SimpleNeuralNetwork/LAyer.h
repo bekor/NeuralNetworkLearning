@@ -11,7 +11,7 @@ public:
 	
 	~Layer();
 
-	std::vector<Point> OutputConvolution(std::vector<Point> input);
+	std::vector<Point> CalculateConvolution(std::vector<Point> input);
 
 private:
 
@@ -19,7 +19,7 @@ private:
 
 	std::vector<std::vector<double>> WeightMatrix;
 	std::vector<double> BiasVector;
-
+	std::vector<Point> nextLayerNeurons;
 
 };
 

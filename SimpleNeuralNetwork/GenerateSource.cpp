@@ -18,7 +18,7 @@ void GenerateSource::Generate()
 	std::vector<Point> points;
 
 	for (int i = 0; i < 10000; i++) {
-		points.push_back(Point::CalculatePointFromLinearFunction(lnf, dist(rng), 1));
+		points.push_back(lnf.CalculatePointAroundLinearFunction(dist(rng), 1));
 	}
 
 	std::ofstream myfile("example.txt");
@@ -26,7 +26,7 @@ void GenerateSource::Generate()
 	{
 		myfile << lnf.getSlope() << " " << lnf.getShift() << "\n\n";
 		for (auto &const p : points) {
-			myfile << p.x << " " << p.y << std::endl;
+			myfile << p.getX() << " " << p.getY() << std::endl;
 		}
 		myfile.close();
 	}
@@ -34,8 +34,8 @@ void GenerateSource::Generate()
 
 
 	std::cout << lnf.getShift() << " " << lnf.getSlope() << std::endl;
-	Point a = Point::CalculatePointFromLinearFunction(lnf, 1, 1);
-	std::cout << a.x << " " << a.y << std::endl;
+	Point a = lnf.CalculatePointAroundLinearFunction(1, 1);
+	std::cout << a.getX() << " " << a.getY() << std::endl;
 }
 
 
@@ -55,7 +55,7 @@ std::vector<Point> GenerateSource::GeneratePoints(int sourceSize)
 	std::vector<Point> points;
 
 	for (int i = 0; i < sourceSize; i++) {
-		points.push_back(Point::CalculatePointFromLinearFunction(lnf, dist(rng), distDeviation(rng)));
+		points.push_back(lnf.CalculatePointAroundLinearFunction( dist(rng), distDeviation(rng)));
 	}
 
 	// creating file with the generated data
@@ -64,7 +64,7 @@ std::vector<Point> GenerateSource::GeneratePoints(int sourceSize)
 	{
 		myfile << lnf.getSlope() << " " << lnf.getShift() << "\n\n";
 		for (auto &const p : points) {
-			myfile << p.x << " " << p.y << std::endl;
+			myfile << p.getX() << " " << p.getY() << std::endl;
 		}
 		myfile.close();
 	}
@@ -76,20 +76,20 @@ std::vector<Point> GenerateSource::GeneratePoints(int sourceSize)
 	return points;
 }
 
-std::shared_ptr<LinkedNetwork> GenerateSource::GenerateNetwork(int weightMatrixSize, int networkSize)
+std::shared_ptr<LinkedNetwork> GenerateSource::GenerateNetwork(int weightMatrixSize, int layerCount)
 {
 	std::shared_ptr<LinkedNetwork> network = std::make_shared<LinkedNetwork>();
 	Layer headOfNetwork = Layer(weightMatrixSize, weightMatrixSize);
 	
 	network->AddToEnd(headOfNetwork);
 	
-	networkSize--;
+	layerCount--;
 	
-	while (networkSize > 0)
+	while (layerCount > 0)
 	{
 		Layer next = Layer(weightMatrixSize, 2);
 		network->AddToEnd(next);
-		networkSize--;
+		layerCount--;
 	}
 	
 	return network;

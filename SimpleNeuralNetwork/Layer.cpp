@@ -33,21 +33,20 @@ Layer::~Layer()
 {
 }
 
-std::vector<Point> Layer::OutputConvolution(std::vector<Point> input)
+std::vector<Point> Layer::CalculateConvolution(std::vector<Point> input)
 {
-	std::vector<Point> output;
-
+	nextLayerNeurons.clear();
 	for (int neuron = 0; neuron < _neuronCount; neuron++) {
 
 		double summX = 0;
 		double summY = 0;
 
 		for (unsigned int ordinal = 0; ordinal < input.size(); ordinal++) {
-			summX += (input[ordinal].x * WeightMatrix[ordinal][neuron] + BiasVector[ordinal]);
-			summY += (input[ordinal].y * WeightMatrix[ordinal][neuron] + BiasVector[ordinal]);
+			summX += (input[ordinal].getX() * WeightMatrix[ordinal][neuron] + BiasVector[ordinal]);
+			summY += (input[ordinal].getY() * WeightMatrix[ordinal][neuron] + BiasVector[ordinal]);
 		}
 
-		output.push_back(Point(summX, summY));
+		nextLayerNeurons.push_back(Point(summX, summY));
 	}
-	return output;
+	return nextLayerNeurons;
 }

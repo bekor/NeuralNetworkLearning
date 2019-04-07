@@ -10,24 +10,21 @@ LinkedNetwork::LinkedNetwork()
 
 void LinkedNetwork::AddToEnd(Layer value)
 {
-	auto current = head;
-	if (current == nullptr) {
-		auto node = CreateNode(value);
+	auto node = CreateNode(value);
+
+	if (head == nullptr) {
 		head = node;
-		tail = node;
 	}
-	else if (current->next == nullptr) {
-		auto node = CreateNode(value);
-		current->next = node;
-		node->prev = current;
-		tail = node;
+	else if (head->next == nullptr) {
+		head->next = node;
+		node->prev = head;
 	}
-	else if (current->next != nullptr && tail != nullptr) {
-		auto node = CreateNode(value);
+	else if (head->next != nullptr && tail != nullptr) {
 		tail->next = node;
 		node->prev = tail;
-		tail = node;
 	}
+	
+	tail = node;
 }
 
 std::vector<Point> LinkedNetwork::RunNetwork(const std::vector<Point> input)
@@ -35,7 +32,7 @@ std::vector<Point> LinkedNetwork::RunNetwork(const std::vector<Point> input)
 	auto current = head;
 	std::vector<Point> output = input;
 	while (current != nullptr) {
-		output = current->layer.OutputConvolution(output);
+		output = current->layer.CalculateConvolution(output);
 		current = current->next;
 	}
 	return output;

@@ -8,6 +8,6 @@ public:
 	static void Generate();
 	static std::vector<Point> GeneratePoints(int sourceSize);
 
-	static std::shared_ptr<LinkedNetwork> GenerateNetwork(int weightMatrixSize, int networkSize = 1);
+	static std::shared_ptr<LinkedNetwork> GenerateNetwork(int weightMatrixSize, int layerCount = 1);
 };
 

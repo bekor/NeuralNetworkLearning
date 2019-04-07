@@ -1,4 +1,5 @@
 #pragma once
+#include "Point.hpp"
 
 class LinearFunction
 {
@@ -19,6 +20,14 @@ public:
 
 	void setShift(long shift) { _shift = shift; }
 	long getShift() { return _shift; }
+
+
+	Point CalculatePointAroundLinearFunction (double rndX, int deviation) {
+		double y = this->_slope * rndX + this->_shift;
+		return Point(rndX, y + deviation);
+	}
+
+
 private:
 	long _shift;
 	long _slope;

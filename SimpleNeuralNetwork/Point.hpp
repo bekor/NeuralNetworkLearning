@@ -1,24 +1,25 @@
 #pragma once
-#include "LinearFunction.hpp"
 
 class Point {
 public:
 	Point() {
-		x = 0;
-		y = 0;
+		_x = 0;
+		_y = 0;
 	}
-	Point(double Xin, double Yin) {
-		x = Xin;
-		y = Yin;
+	Point(double x, double y) {
+		_x = x;
+		_y = y;
 	}
 
 	virtual ~Point() {};
 
-	static Point CalculatePointFromLinearFunction(LinearFunction lnf, double rndX, int deviation) {
-		double y = lnf.getSlope() * rndX + lnf.getShift();
-		return Point(rndX + deviation, y);
-	}
+	double getX() { return _x; }
+	void setX(double x) { _x = x; }
 
-	double x;
-	double y;
+	double getY() { return _y; }
+	void setY(double y) { _y = y; }
+
+private:
+	double _x;
+	double _y;
 };

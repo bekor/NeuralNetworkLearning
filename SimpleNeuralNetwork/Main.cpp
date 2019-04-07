@@ -31,11 +31,13 @@ int main()
 	std::vector<Point> output = network->RunNetwork(input);
 
 	for (auto & const p : output) {
-		std::cout << p.x << " " << p.y << "\n";
+		std::cout << p.getX() << " " << p.getY() << "\n";
 	}
 
-	float slope = (output.at(1).y - output.at(0).y) / (output.at(1).x - output.at(0).x);
-	float intercetp = output.at(0).y + slope * output.at(0).x;
+	double slope = (output.at(1).getY() - output.at(0).getY()) 
+				/ (output.at(1).getX() - output.at(0).getX());
+
+	double intercetp = output.at(0).getY() + slope * output.at(0).getX();
 
 	std::cout << "Slope: "		  << std::to_string(slope)
 			  << " y-intercept: " << std::to_string(intercetp) << "\n";
