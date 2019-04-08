@@ -32,7 +32,7 @@ std::vector<Point> LinkedNetwork::RunNetwork(const std::vector<Point> input)
 	auto current = head;
 	std::vector<Point> output = input;
 	while (current != nullptr) {
-		output = current->layer.CalculateConvolution(output);
+		output = current->layer.ForwardPropagation(sigma, output);
 		current = current->next;
 	}
 	return output;

@@ -3,6 +3,7 @@
 #include "Node.hpp"
 #include "Layer.h"
 #include "Point.hpp"
+#include "Sigma.h"
 
 class LinkedNetwork
 {
@@ -19,6 +20,7 @@ public:
 	std::vector<Point> RunNetwork(std::vector<Point> input);
 
 private:
+	Sigma sigma;
 	std::shared_ptr<Node> CreateNode(Layer value);
 
 };
