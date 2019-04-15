@@ -24,7 +24,10 @@ private:
 	std::vector<double> NeuronActivation; // a
 	std::vector<double> LinearGradient; // delta
 	std::vector<double> BiasVectorGrad;
+	std::vector<double> BiasVectorGrad_avg;
 	std::vector<std::vector<double>> WeightMatrixGrad;
+	std::vector<std::vector<double>> WeightMatrixGrad_avg;
+
 	
 
 };
