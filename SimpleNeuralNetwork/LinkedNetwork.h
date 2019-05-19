@@ -8,8 +8,7 @@
 class LinkedNetwork
 {
 protected:
-	std::shared_ptr<Node> head = nullptr;
-	std::shared_ptr<Node> tail = nullptr;
+	std::vector<Layer> network;
 
 public:
 	LinkedNetwork();
@@ -17,11 +16,9 @@ public:
 
 	void AddToEnd(Layer value);
 
-	std::vector<Point> RunNetwork(std::vector<Point> input);
+	std::vector<double> RunNetwork(std::vector<double> input);
 
 private:
-	Sigma sigma;
-	std::shared_ptr<Node> CreateNode(Layer value);
-
+	std::shared_ptr<Sigma> sigma;
 };
 

@@ -4,41 +4,18 @@
 
 LinkedNetwork::LinkedNetwork()
 {
-	head = nullptr;
-	tail = head;
 }
 
 void LinkedNetwork::AddToEnd(Layer value)
 {
-	auto node = CreateNode(value);
-
-	if (head == nullptr) {
-		head = node;
-	}
-	else if (head->next == nullptr) {
-		head->next = node;
-		node->prev = head;
-	}
-	else if (head->next != nullptr && tail != nullptr) {
-		tail->next = node;
-		node->prev = tail;
-	}
-	
-	tail = node;
+	network.push_back(value);
 }
 
-std::vector<Point> LinkedNetwork::RunNetwork(const std::vector<Point> input)
+std::vector<double> LinkedNetwork::RunNetwork(const std::vector<double> input)
 {
-	auto current = head;
-	std::vector<Point> output = input;
-	while (current != nullptr) {
-		output = current->layer.ForwardPropagation(sigma, output);
-		current = current->next;
+	std::vector<double> output = input;
+	for( auto& layer : network) {
+		output = layer.ForwardPropagation(sigma, output);
 	}
 	return output;
-}
-
-std::shared_ptr<Node> LinkedNetwork::CreateNode(Layer value)
-{
-	return std::make_shared<Node>(value);
 }

@@ -9,13 +9,22 @@ Layer::Layer()
 	_neuronCount = 0;
 }
 
-Layer::Layer(int prevneuronCount, int neuronCount)
+Layer::Layer(int prevNeuronCount, int neuronCount)
 	: _neuronCount(neuronCount)
+{
+	InitLayer(prevNeuronCount, neuronCount);
+}
+
+Layer::~Layer()
+{
+}
+
+void Layer::InitLayer(int prevNeuronCount, int neuronCount)
 {
 	std::random_device dev;
 	std::mt19937 rng(dev());
 	std::uniform_real_distribution<double> dist(0, 1);
-	for (int weightMatrixHeight = 0; weightMatrixHeight < prevneuronCount; weightMatrixHeight++) {
+	for (int weightMatrixHeight = 0; weightMatrixHeight < prevNeuronCount; weightMatrixHeight++) {
 		std::vector<double> row;
 		for (int weightMatrixWidth = 0; weightMatrixWidth < neuronCount; weightMatrixWidth++)
 		{
@@ -24,30 +33,25 @@ Layer::Layer(int prevneuronCount, int neuronCount)
 		WeightMatrix.push_back(row);
 		BiasVector.push_back(dist(rng));
 	}
-
 }
 
 
-
-Layer::~Layer()
-{
-}
-
-std::vector<Point> Layer::ForwardPropagation(Sigma sigma, std::vector<Point> input)
+std::vector<double> Layer::ForwardPropagation(std::shared_ptr<Sigma> sigma, std::vector<double> input)
 {
 	NeuronLinearActivation.clear();
 	for (int neuron = 0; neuron < _neuronCount; neuron++) {
 
-		double summX = 0;
-		double summY = 0;
+		double summ = 0;
 
 		for (unsigned int ordinal = 0; ordinal < input.size(); ordinal++) {
-			summX += (input[ordinal].getX() * WeightMatrix[ordinal][neuron] + BiasVector[ordinal]);
-			summY += (input[ordinal].getY() * WeightMatrix[ordinal][neuron] + BiasVector[ordinal]);
+			summ += (input[ordinal] * WeightMatrix[ordinal][neuron] + BiasVector[neuron]); //TODO: check this calculation!
 		}
-
-		NeuronLinearActivation.push_back(Point(summX, summY));
-
+		NeuronLinearActivation.push_back(summ);
 	}
 	return NeuronLinearActivation;
+}
+
+std::vector<double> Layer::BackwardPropagation(std::vector<std::vector<double>> nextWeight, std::vector<double> nextLinearGradient) 
+{
+	return std::vector<double>();
 }

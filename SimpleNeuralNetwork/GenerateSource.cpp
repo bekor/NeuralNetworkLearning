@@ -58,20 +58,6 @@ std::vector<Point> GenerateSource::GeneratePoints(int sourceSize)
 		points.push_back(lnf.CalculatePointAroundLinearFunction( dist(rng), distDeviation(rng)));
 	}
 
-	// creating file with the generated data
-
-	//std::ofstream myfile("example.txt");
-	//if (myfile.is_open())
-	//{
-	//	myfile << lnf.getSlope() << " " << lnf.getShift() << "\n\n";
-	//	for (auto &const p : points) {
-	//		myfile << p.getX() << " " << p.getY() << std::endl;
-	//	}
-	//	myfile.close();
-	//}
-
-	//// Error "log"
-	//else std::cout << "Unable to open file";
 	std::cout << lnf.getSlope() << " " << lnf.getShift() << std::endl;
 
 	return points;
