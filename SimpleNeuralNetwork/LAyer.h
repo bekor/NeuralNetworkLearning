@@ -1,7 +1,6 @@
 #pragma once
 #include <memory>
 #include <vector>
-#include "Point.hpp"
 #include "Sigma.h"
 
 class Layer
@@ -30,6 +29,7 @@ private:
 
 	std::vector<double> BiasVectorGrad;
 	std::vector<std::vector<double>> WeightMatrixGrad;
+
 
 	std::vector<double> BiasVectorGrad_avg;
 	std::vector<std::vector<double>> WeightMatrixGrad_avg;
