@@ -1,6 +1,7 @@
 #pragma once
 #include <memory>
 #include <vector>
+#include "Sigma.h"
 
 /***
  * Layer i-th neuron in the j-th position, 
@@ -13,6 +14,7 @@ public:
 	Neuron(double _bias, std::vector<double> _weights);
 	void InitNeuron(double _bias, std::vector<double> _weights);
 
+	double CalculateForwardPropagation(std::shared_ptr<Sigma> sigma, std::vector<double> input);
 
 private:
 	std::vector<double> weights; // weights between Layer i-1 and i  

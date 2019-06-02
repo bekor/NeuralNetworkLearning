@@ -30,25 +30,23 @@ void Layer::InitLayer(int prevNeuronCount, int neuronCount)
 		{
 			row.push_back(dist(rng));
 		}
-		WeightMatrix.push_back(row);
-		BiasVector.push_back(dist(rng));
+		std::shared_ptr<Neuron> currentNeuron = std::make_shared<Neuron>(dist(rng), row);
+		LayerNeurons.push_back(currentNeuron);
 	}
 }
 
 
 std::vector<double> Layer::ForwardPropagation(std::shared_ptr<Sigma> sigma, std::vector<double> input)
 {
-	NeuronLinearActivation.clear();
-	for (int neuron = 0; neuron < _neuronCount; neuron++) {
+	std::vector<double> calculatedActivation;
+	for (int neuronIndex = 0; neuronIndex < _neuronCount; neuronIndex++) {
 
 		double summ = 0;
-
-		for (unsigned int ordinal = 0; ordinal < input.size(); ordinal++) {
-			summ += (input[ordinal] * WeightMatrix[ordinal][neuron] + BiasVector[neuron]); //TODO: check this calculation!
-		}
-		NeuronLinearActivation.push_back(summ);
+		auto currentNeuron = LayerNeurons[neuronIndex];
+		summ = currentNeuron->CalculateForwardPropagation(sigma, input);
+		calculatedActivation.push_back(summ);
 	}
-	return NeuronLinearActivation;
+	return calculatedActivation;
 }
 
 std::vector<double> Layer::BackwardPropagation(std::vector<std::vector<double>> nextWeight, std::vector<double> nextLinearGradient) 

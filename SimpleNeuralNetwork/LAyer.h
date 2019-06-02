@@ -2,6 +2,7 @@
 #include <memory>
 #include <vector>
 #include "Sigma.h"
+#include "Neuron.h"
 
 class Layer
 {
@@ -19,22 +20,6 @@ private:
 
 	long _neuronCount;
 
-	// Forward propagation variable
-	std::vector<double> BiasVector; // every node hase one bias
-	std::vector<std::vector<double>> WeightMatrix; // every node has n weight (depends on the previous layer neuron count)
-
-	std::vector<double> NeuronLinearActivation; // z
-	std::vector<double> NeuronActivation; // a
-	std::vector<double> LinearGradient; // delta
-
-	std::vector<double> BiasVectorGrad;
-	std::vector<std::vector<double>> WeightMatrixGrad;
-
-
-	std::vector<double> BiasVectorGrad_avg;
-	std::vector<std::vector<double>> WeightMatrixGrad_avg;
-
-	
-
+	std::vector<std::shared_ptr<Neuron>> LayerNeurons;
 };
 
