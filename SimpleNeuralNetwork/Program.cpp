@@ -2,7 +2,7 @@
 #include "Program.h"
 #include "GenerateSource.h"
 
-Program::Program() : network(nullptr)
+Program::Program() : m_Network(nullptr)
 {
 }
 
@@ -13,15 +13,18 @@ Program::~Program()
 
 void Program::init()
 {
-	std::vector<Point> inputPoints = GenerateSource::GeneratePoints(1000);
-	network = GenerateSource::GenerateNetwork(10, 2);
+	// At first we try it with something we define
+	std::vector<Point> inputPoints = GenerateSource::GeneratePoints(10);
+	m_Network = GenerateSource::GenerateNetwork(inputPoints.size(), 10);
 
+	// Here we should flatten any input
+	FlattenPointInput(inputPoints);
 }
 
 void Program::run()
 {
 
-	std::vector<double> output = network->TrainNetwork(_flattenedInput);
+	std::vector<double> output = m_Network->TrainNetwork(m_FlattenedInput);
 
 	// specific actions, based on the expectied output.
 	//for (auto & const p : output) {
@@ -35,4 +38,11 @@ void Program::run()
 
 	//std::cout << "Slope: " << std::to_string(slope)
 	//	<< " y-intercept: " << std::to_string(intercetp) << "\n";
+}
+
+// Flattening X, Y pairs into a vector of long. 
+// Points has a function we do not care about the logic of flattening, just jusing it's function
+void Program::FlattenPointInput(std::vector<Point> input)
+{
+	m_FlattenedInput = Point::Flattened(input);
 }

@@ -13,7 +13,8 @@ public:
 	void init();
 	void run();
 private:
-	std::vector<double> _flattenedInput;
-	std::shared_ptr<LinkedNetwork> network;
+	void FlattenPointInput(std::vector<Point> input);
+	std::vector<double> m_FlattenedInput;
+	std::shared_ptr<LinkedNetwork> m_Network;
 };
 

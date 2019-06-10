@@ -16,17 +16,17 @@ int main(int argc, char *argv[])
 	ArgumentHandler arg(argc, argv);
 
 
-	//Program p;
-	//try
-	//{
-	//	p.init();
-	//	p.run();
-	//}
-	//catch (const std::exception& e)
-	//{
-	//	std::cout << e.what() << std::endl;
-	//	std::cin.get();
-	//}
+	Program p;
+	try
+	{
+		p.init();
+		p.run();
+	}
+	catch (const std::exception& e)
+	{
+		std::cout << e.what() << std::endl;
+		std::cin.get();
+	}
 
 
 
