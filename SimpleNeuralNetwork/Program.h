@@ -3,6 +3,7 @@
 #include <vector>
 #include <memory>
 #include "Point.hpp"
+#include "LinkedNetwork.h"
 
 class Program
 {

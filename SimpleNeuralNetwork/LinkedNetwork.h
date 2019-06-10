@@ -16,7 +16,7 @@ public:
 
 	void AddToEnd(Layer value);
 
-	std::vector<double> RunNetwork(std::vector<double> input);
+	std::vector<double> TrainNetwork(std::vector<double> input);
 
 private:
 	std::shared_ptr<Sigma> sigma;

@@ -14,6 +14,7 @@ public:
 	~Layer();
 
 	std::vector<double> ForwardPropagation(std::shared_ptr<Sigma> sig, std::vector<double> prevActivation);
+
 	std::vector<double> BackwardPropagation(std::vector<std::vector<double>> nextWeight,std::vector<double> nextLinearGradient );
 private:
 	void InitLayer(int prevNeuronCount, int neuronCount);

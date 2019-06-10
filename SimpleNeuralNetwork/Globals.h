@@ -6,10 +6,10 @@
 class Globals
 {
 public:
-	static std::shared_ptr<Globals>& getInstance();
-	static std::shared_ptr<Logger> & logger;
+	std::shared_ptr<Globals>& getInstance();
+	std::shared_ptr<Logger> logger;
 private:
 	Globals();
-	static std::shared_ptr<Globals> instance;
+	std::shared_ptr<Globals> instance;
 };
 

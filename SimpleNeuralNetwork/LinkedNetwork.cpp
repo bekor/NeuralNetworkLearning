@@ -11,7 +11,7 @@ void LinkedNetwork::AddToEnd(Layer value)
 	network.push_back(value);
 }
 
-std::vector<double> LinkedNetwork::RunNetwork(const std::vector<double> input)
+std::vector<double> LinkedNetwork::TrainNetwork(const std::vector<double> input)
 {
 	std::vector<double> output = input;
 	for( auto& layer : network) {

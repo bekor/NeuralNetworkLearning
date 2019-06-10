@@ -21,7 +21,7 @@ void Program::init()
 void Program::run()
 {
 
-	std::vector<double> output = network->RunNetwork(_flattenedInput);
+	std::vector<double> output = network->TrainNetwork(_flattenedInput);
 
 	// specific actions, based on the expectied output.
 	//for (auto & const p : output) {
