@@ -25,7 +25,7 @@ void GenerateSource::Generate()
 	if (myfile.is_open())
 	{
 		myfile << lnf.getSlope() << " " << lnf.getShift() << "\n\n";
-		for (auto &const p : points) {
+		for (auto &p : points) {
 			myfile << p.getX() << " " << p.getY() << std::endl;
 		}
 		myfile.close();
@@ -58,39 +58,26 @@ std::vector<Point> GenerateSource::GeneratePoints(int sourceSize)
 		points.push_back(lnf.CalculatePointAroundLinearFunction( dist(rng), distDeviation(rng)));
 	}
 
-	// creating file with the generated data
-
-	//std::ofstream myfile("example.txt");
-	//if (myfile.is_open())
-	//{
-	//	myfile << lnf.getSlope() << " " << lnf.getShift() << "\n\n";
-	//	for (auto &const p : points) {
-	//		myfile << p.getX() << " " << p.getY() << std::endl;
-	//	}
-	//	myfile.close();
-	//}
-
-	//// Error "log"
-	//else std::cout << "Unable to open file";
 	std::cout << lnf.getSlope() << " " << lnf.getShift() << std::endl;
 
 	return points;
 }
 
+// Creating the fully connected network without upscaling or down scaling
+// Just the last layer size is defined by the program (right now)
 std::shared_ptr<LinkedNetwork> GenerateSource::GenerateNetwork(int weightMatrixSize, int layerCount)
 {
 	std::shared_ptr<LinkedNetwork> network = std::make_shared<LinkedNetwork>();
-	Layer headOfNetwork = Layer(weightMatrixSize, weightMatrixSize);
 	
-	network->AddToEnd(headOfNetwork);
-	
-	layerCount--;
-	
-	while (layerCount > 0)
+	while (layerCount > 1)
 	{
-		Layer next = Layer(weightMatrixSize, 2);
+		Layer next = Layer(weightMatrixSize, weightMatrixSize);
 		network->AddToEnd(next);
 		layerCount--;
+	}
+	if (layerCount == 1) {
+		// We do not check eni format for input, we preparing it to predict for two output
+		Layer next = Layer(weightMatrixSize, 2);
 	}
 	
 	return network;

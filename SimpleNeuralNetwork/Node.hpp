@@ -1,6 +1,7 @@
 #pragma once
 #include <memory>
 #include "Layer.h"
+
 struct Node
 {
 	std::weak_ptr<Node> prev;

@@ -9,45 +9,47 @@ Layer::Layer()
 	_neuronCount = 0;
 }
 
-Layer::Layer(int prevneuronCount, int neuronCount)
+Layer::Layer(int prevNeuronCount, int neuronCount)
 	: _neuronCount(neuronCount)
 {
-	std::random_device dev;
-	std::mt19937 rng(dev());
-	std::uniform_real_distribution<double> dist(0, 1);
-	for (int weightMatrixHeight = 0; weightMatrixHeight < prevneuronCount; weightMatrixHeight++) {
-		std::vector<double> row;
-		for (int weightMatrixWidth = 0; weightMatrixWidth < neuronCount; weightMatrixWidth++)
-		{
-			row.push_back(dist(rng));
-		}
-		WeightMatrix.push_back(row);
-		BiasVector.push_back(dist(rng));
-	}
-
+	InitLayer(prevNeuronCount, neuronCount);
 }
-
-
 
 Layer::~Layer()
 {
 }
 
-std::vector<Point> Layer::ForwardPropagation(Sigma sigma, std::vector<Point> input)
+void Layer::InitLayer(int prevNeuronCount, int neuronCount)
 {
-	NeuronLinearActivation.clear();
-	for (int neuron = 0; neuron < _neuronCount; neuron++) {
-
-		double summX = 0;
-		double summY = 0;
-
-		for (unsigned int ordinal = 0; ordinal < input.size(); ordinal++) {
-			summX += (input[ordinal].getX() * WeightMatrix[ordinal][neuron] + BiasVector[ordinal]);
-			summY += (input[ordinal].getY() * WeightMatrix[ordinal][neuron] + BiasVector[ordinal]);
+	std::random_device dev;
+	std::mt19937 rng(dev());
+	std::uniform_real_distribution<double> dist(0, 1);
+	for (int weightMatrixHeight = 0; weightMatrixHeight < prevNeuronCount; weightMatrixHeight++) {
+		std::vector<double> row;
+		for (int weightMatrixWidth = 0; weightMatrixWidth < neuronCount; weightMatrixWidth++)
+		{
+			row.push_back(dist(rng));
 		}
-
-		NeuronLinearActivation.push_back(Point(summX, summY));
-
+		std::shared_ptr<Neuron> currentNeuron = std::make_shared<Neuron>(dist(rng), row);
+		LayerNeurons.push_back(currentNeuron);
 	}
-	return NeuronLinearActivation;
+}
+
+
+std::vector<double> Layer::ForwardPropagation(std::shared_ptr<Sigma> sigma, std::vector<double> input)
+{
+	std::vector<double> calculatedActivation;
+	for (int neuronIndex = 0; neuronIndex < _neuronCount; neuronIndex++) {
+
+		double summ = 0;
+		auto currentNeuron = LayerNeurons[neuronIndex];
+		summ = currentNeuron->CalculateForwardPropagation(sigma, input);
+		calculatedActivation.push_back(summ);
+	}
+	return calculatedActivation;
+}
+
+std::vector<double> Layer::BackwardPropagation(std::vector<std::vector<double>> nextWeight, std::vector<double> nextLinearGradient) 
+{
+	return std::vector<double>();
 }
