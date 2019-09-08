@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "Program.h"
 #include "GenerateSource.h"
+#include "Flattener.hpp"
 
 Program::Program() : m_Network(nullptr)
 {
@@ -14,8 +15,12 @@ Program::~Program()
 void Program::init()
 {
 	// At first we try it with something we define
-	std::vector<Point> inputPoints = GenerateSource::GeneratePoints(10);
+	std::vector<std::shared_ptr<Point>> inputPoints = GenerateSource::GeneratePoints(10);
 	m_Network = GenerateSource::GenerateNetwork(inputPoints.size(), 10);
+	
+	//TODO: construct a Batch for traning.
+	// One batch storing a pile of input data let say 10 input for every Batch;
+	// The traning running through these batches
 
 	// Here we should flatten any input
 	FlattenPointInput(inputPoints);
@@ -42,7 +47,7 @@ void Program::run()
 
 // Flattening X, Y pairs into a vector of long. 
 // Points has a function we do not care about the logic of flattening, just jusing it's function
-void Program::FlattenPointInput(std::vector<Point> input)
+void Program::FlattenPointInput(std::vector<std::shared_ptr<Point>> input)
 {
-	m_FlattenedInput = Point::Flattened(input);
+	m_FlattenedInput = Flattener::FlattenPoints(input);
 }

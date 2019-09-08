@@ -22,7 +22,12 @@ public:
 	long getShift() { return _shift; }
 
 
-	Point CalculatePointAroundLinearFunction (double rndX, int deviation) {
+	std::shared_ptr<Point> CalculatePointAroundLinearFunction (double rndX, int deviation) {
+		double y = this->_slope * rndX + this->_shift;
+		return std::make_shared<Point>(rndX, y + deviation);
+	}
+
+	Point CalculatePointAroundLinearFunctionObj(double rndX, int deviation) {
 		double y = this->_slope * rndX + this->_shift;
 		return Point(rndX, y + deviation);
 	}

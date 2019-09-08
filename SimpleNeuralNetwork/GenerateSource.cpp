@@ -1,9 +1,11 @@
 #include "pch.h"
-#include "GenerateSource.h"
 #include <random>
 #include <iostream>
 #include <fstream>
+#include <memory>
+
 #include "Point.hpp"
+#include "GenerateSource.h"
 #include "LinearFunction.hpp"
 
 
@@ -18,7 +20,7 @@ void GenerateSource::Generate()
 	std::vector<Point> points;
 
 	for (int i = 0; i < 10000; i++) {
-		points.push_back(lnf.CalculatePointAroundLinearFunction(dist(rng), 1));
+		points.push_back(lnf.CalculatePointAroundLinearFunctionObj(dist(rng), 1));
 	}
 
 	std::ofstream myfile("example.txt");
@@ -34,25 +36,27 @@ void GenerateSource::Generate()
 
 
 	std::cout << lnf.getShift() << " " << lnf.getSlope() << std::endl;
-	Point a = lnf.CalculatePointAroundLinearFunction(1, 1);
+	Point a = lnf.CalculatePointAroundLinearFunctionObj(1, 1);
 	std::cout << a.getX() << " " << a.getY() << std::endl;
 }
 
 
 // Generating data source for teaching and testing network
-std::vector<Point> GenerateSource::GeneratePoints(int sourceSize)
+std::vector<std::shared_ptr<Point>> GenerateSource::GeneratePoints(int sourceSize)
 {
 	// for random number generation
 	std::random_device dev;
 	std::mt19937 rng(dev());
+
 	// one for the y - intercept and for the resource generation
 	// one for the linear function slope
 	std::uniform_int_distribution<std::mt19937::result_type> dist(0, 1000);
 	std::uniform_int_distribution<std::mt19937::result_type> dist100(0, 100);
 	std::uniform_int<int> distDeviation(-10, 10);
+
 	// defining the linear function
 	LinearFunction lnf = LinearFunction(dist100(rng), dist(rng));
-	std::vector<Point> points;
+	std::vector<std::shared_ptr<Point>> points;
 
 	for (int i = 0; i < sourceSize; i++) {
 		points.push_back(lnf.CalculatePointAroundLinearFunction( dist(rng), distDeviation(rng)));
@@ -65,7 +69,7 @@ std::vector<Point> GenerateSource::GeneratePoints(int sourceSize)
 
 // Creating the fully connected network without upscaling or down scaling
 // Just the last layer size is defined by the program (right now)
-std::shared_ptr<LinkedNetwork> GenerateSource::GenerateNetwork(int weightMatrixSize, int layerCount)
+std::shared_ptr<LinkedNetwork> GenerateSource::GenerateNetwork(size_t weightMatrixSize, int layerCount)
 {
 	std::shared_ptr<LinkedNetwork> network = std::make_shared<LinkedNetwork>();
 	
