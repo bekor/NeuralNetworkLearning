@@ -19,6 +19,12 @@
     <Filter Include="Source Files\Network">
       <UniqueIdentifier>{5791cfd1-74c0-479e-8c88-c627cb9f01cf}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Function">
+      <UniqueIdentifier>{7f951b2f-be68-4320-8985-423b7283742b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Function">
+      <UniqueIdentifier>{e11264c0-5fa7-4b5a-9f5a-980f0869a3a6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -83,11 +89,14 @@
     <ClCompile Include="Logger.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Neuron.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="ArgumentHandler.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Neuron.cpp">
+      <Filter>Source Files\Network</Filter>
+    </ClCompile>
+    <ClCompile Include="Flattener.hpp">
+      <Filter>Header Files\Function</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
