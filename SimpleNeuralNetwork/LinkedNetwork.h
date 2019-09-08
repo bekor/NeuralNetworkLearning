@@ -19,6 +19,7 @@ public:
 	std::vector<double> TrainNetwork(std::vector<double> input);
 
 private:
+	double CalculateDelta(std::vector<double> forwardPropResult, std::vector<double> expected);
 	std::shared_ptr<Sigma> sigma;
 };
 
