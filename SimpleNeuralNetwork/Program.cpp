@@ -23,7 +23,7 @@ void Program::init() {
 void Program::run() {
 
   std::vector<double> output = m_Network->TrainNetwork(m_FlattenedInput);
-  //
+
   // specific actions, based on the expectied output.
   // for (auto & const p : output) {
   //	std::cout << p.getX() << " " << p.getY() << "\n";
