@@ -11,7 +11,7 @@
 #include "Point.hpp"
 #include "Program.h"
 
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
 	ArgumentHandler arg(argc, argv);
 
@@ -22,10 +22,9 @@ int main(int argc, char *argv[])
 		p.init();
 		p.run();
 	}
-	catch (const std::exception& e)
+	catch (const std::exception & e)
 	{
 		std::cout << e.what() << std::endl;
-		std::cin.get();
 	}
 
 
