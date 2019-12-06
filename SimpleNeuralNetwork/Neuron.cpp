@@ -1,4 +1,3 @@
-#include "pch.h"
 #include "Neuron.h"
 
 Neuron::Neuron(double _bias, std::vector<double> _weights) 

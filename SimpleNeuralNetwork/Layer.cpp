@@ -1,4 +1,3 @@
-#include "pch.h"
 #include "Layer.h"
 #include <random>
 #include "Point.hpp"
